@@ -10,7 +10,7 @@ export const createExpense: RequestHandler = async (req, res, next) => {
   const expense = await expenseModel.create({
     name: req.body.name,
     amount: req.body.amount,
-    date: req.body.date
+    date: new Date(req.body.date)
   })
 
   res.status(201).json({ message: "New expense has been created.", expense: expense })
