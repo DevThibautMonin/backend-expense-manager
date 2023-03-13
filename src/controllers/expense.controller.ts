@@ -8,7 +8,7 @@ export const getExpenses: RequestHandler = async (req, res, next) => {
 
 export const createExpense: RequestHandler = async (req, res, next) => {
   const expense = await expenseModel.create({
-    name: req.body.name,
+    title: req.body.title,
     amount: req.body.amount,
     date: new Date(req.body.date)
   })
@@ -32,8 +32,6 @@ export const updateExpense: RequestHandler = async (req, res, next) => {
 export const deleteExpense: RequestHandler = async (req, res, next) => {
 
   const expense = await expenseModel.findById(req.params.id)
-  console.log(expense);
-  
 
   if (!expense) {
     res.status(400).json({ message: "This expense doesn't exist" })
