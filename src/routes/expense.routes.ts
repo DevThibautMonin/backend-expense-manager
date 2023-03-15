@@ -1,10 +1,11 @@
 import { Router } from 'express'
 import { createExpense, deleteExpense, getExpenses, updateExpense } from '../controllers/expense.controller'
+import { verifyUserToken } from '../middlewares/authentication.middleware'
 
 const expenseRouter = Router()
 
 expenseRouter.post('/', createExpense)
-expenseRouter.get('/', getExpenses)
+expenseRouter.get('/', verifyUserToken, getExpenses)
 expenseRouter.put('/:id', updateExpense)
 expenseRouter.delete('/:id', deleteExpense)
 
