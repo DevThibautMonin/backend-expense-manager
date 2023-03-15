@@ -40,8 +40,8 @@ export const login: RequestHandler = async (req, res, next) => {
 
   if (user && await bcrypt.compare(password, user.password)) {
     let payload = { id: user.id }
-    const token = jwt.sign(payload, process.env.JWT_SECRET as Secret)
-    return res.status(200).header('auth-token', token).send({ "token": token })
+    const token = jwt.sign(payload, process.env.JWT_SECRET as Secret, { expiresIn: "24h" })
+    return res.status(200).header("Authorization", token).send({ "token": token })
   }
 
 }
