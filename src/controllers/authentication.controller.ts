@@ -42,6 +42,8 @@ export const login: RequestHandler = async (req, res, next) => {
     let payload = { id: user.id }
     const token = jwt.sign(payload, process.env.JWT_SECRET as Secret, { expiresIn: "24h" })
     return res.status(200).header("Authorization", token).send({ "token": token })
+  } else {
+    return res.status(404).json({ message: "User doesn't exist, please verify your email or password." })
   }
 
 }
