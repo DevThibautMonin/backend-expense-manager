@@ -3,13 +3,15 @@ import expenseModel from '../models/expense.model'
 
 export const getExpenses: RequestHandler = async (req, res, next) => {
   const expenses = await expenseModel.find()
-  res.status(200).json(expenses)
+  return res.status(200).json(expenses)
 }
 
 export const getExpensesByUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.userId
-  const expenses = await expenseModel.find({ userId })
-  res.status(200).json(expenses)
+  // const category = 
+
+  const expenses = await expenseModel.find({ userId: userId })
+  return res.status(200).json(expenses)
 }
 
 export const createExpense: RequestHandler = async (req, res, next) => {
@@ -17,7 +19,8 @@ export const createExpense: RequestHandler = async (req, res, next) => {
     title: req.body.title,
     amount: req.body.amount,
     date: new Date(req.body.date),
-    userId: req.body.userId
+    userId: req.body.userId,
+    category: req.body.category
   })
 
   res.status(201).json({ message: "New expense has been created.", expense: expense })
