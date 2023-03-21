@@ -39,7 +39,7 @@ export const login: RequestHandler = async (req, res, next) => {
   const user = await authenticationModel.findOne({ email })
 
   if (user && await bcrypt.compare(password, user.password)) {
-    let payload = { id: user.id }
+    let payload = { id: user.id, username: user.username }
     const token = jwt.sign(payload, process.env.JWT_SECRET as Secret, { expiresIn: "24h" })
     return res.status(200).header("Authorization", token).send({ "token": token })
   } else {
