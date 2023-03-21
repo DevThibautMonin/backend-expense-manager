@@ -4,6 +4,7 @@ import expenseRouter from './routes/expense.routes'
 import connectDB from './config/db'
 import cors from 'cors'
 import authenticationRouter from './routes/authentication.routes'
+import helmet from 'helmet'
 dotenv.config()
 
 connectDB()
@@ -13,6 +14,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(helmet())
 
 app.use('/expense', expenseRouter)
 app.use('/authentication', authenticationRouter)
