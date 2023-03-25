@@ -8,9 +8,10 @@ export const getExpenses: RequestHandler = async (req, res, next) => {
 
 export const getExpensesByUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.userId
-  // const category = 
+  const category = req.params.category
 
-  const expenses = await expenseModel.find({ userId: userId })
+  const expenses = await expenseModel.find({ userId: userId, category: category })
+
   return res.status(200).json(expenses)
 }
 
