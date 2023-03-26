@@ -1,11 +1,6 @@
 import { RequestHandler } from 'express'
 import expenseModel from '../models/expense.model'
 
-export const getExpenses: RequestHandler = async (req, res, next) => {
-  const expenses = await expenseModel.find()
-  return res.status(200).json(expenses)
-}
-
 export const getExpensesByUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.userId
   const category = req.params.category
