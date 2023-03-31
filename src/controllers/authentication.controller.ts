@@ -52,6 +52,15 @@ export const login: RequestHandler = async (req, res, next) => {
 
 }
 
+export const getUser: RequestHandler = async (req, res, next) => {
+  const id = req.body.id
+
+  const user = await authenticationModel.findOne({ id })
+
+  return res.status(200).json({ message: "User exists", user: user })
+
+}
+
 export const generateAccessToken = (payload: object) => {
   return jwt.sign({ payload }, process.env.JWT_SECRET as Secret, { expiresIn: process.env.JWT_EXPIRES })
 }

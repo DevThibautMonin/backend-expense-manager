@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { login, register } from '../controllers/authentication.controller'
+import { getUser, login, register } from '../controllers/authentication.controller'
 import { body } from 'express-validator'
 
 const authenticationRouter = Router()
@@ -10,5 +10,6 @@ authenticationRouter.post('/register',
     body('password').isStrongPassword().withMessage('Please enter a stronger password.')
   ], register)
 authenticationRouter.post('/login', login)
+authenticationRouter.get('/:id', getUser)
 
 export default authenticationRouter
