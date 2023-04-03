@@ -5,7 +5,13 @@ export const getExpensesByUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.userId
   const category = req.params.category
 
-  const expenses = await expenseModel.find({ userId: userId, category: category })
+  let expenses
+  
+  if (category === undefined || category.toString() === 'undefined') {
+    expenses = await expenseModel.find({ userId: userId })
+  } else {
+    expenses = await expenseModel.find({ userId: userId, category: category })
+  }
 
   return res.status(200).json(expenses)
 }
