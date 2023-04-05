@@ -5,8 +5,6 @@ export const getExpensesByUser: RequestHandler = async (req, res, next) => {
   const userId = req.params.userId
   const category = req.params.category
 
-  console.log(category)
-
   let expenses
   
   if (category === "Default") {
